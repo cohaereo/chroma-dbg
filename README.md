@@ -1,5 +1,5 @@
 # chroma-dbg
-*Put your monkey-brain pattern recognition to use with syntax highlighting for the standard Debug trait*
+*Put your primate brain's pattern recognition to use with syntax highlighting for the standard Debug trait*
 
 ![Crates.io Version](https://img.shields.io/crates/v/chroma-dbg) ![docs.rs](https://img.shields.io/docsrs/chroma-dbg)
 
