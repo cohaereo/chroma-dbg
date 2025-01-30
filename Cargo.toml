@@ -2,6 +2,20 @@
 name = "chroma-dbg"
 version = "0.1.0"
 edition = "2021"
+description = "Put your primate brain's pattern recognition to use with syntax highlighting for the standard Debug trait"
+authors = ["cohaereo <cohae@cohae.dev>"]
+repository = "https://github.com/cohaereo/chroma-dbg"
+license = "MIT"
+readme = "README.md"
+categories = ["development-tools", "value-formatting", "parsing"]
+keywords = [
+    "debug",
+    "color",
+    "formatting",
+    "syntax-highlighting",
+    "pretty-printing",
+]
+include = ["**/*.rs", "Cargo.toml"]
 
 [dependencies]
 anstyle = "1.0.10"
