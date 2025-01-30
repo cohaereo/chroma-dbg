@@ -1,7 +1,7 @@
 mod config;
 mod util;
 
-pub use config::{ChromaConfig, Color};
+pub use config::{ChromaConfig, Color, InlineThreshold, IntegerFormat};
 
 use core::fmt;
 use std::fmt::{Debug, Write};
@@ -31,7 +31,7 @@ impl ChromaConfig {
     }
 
     pub fn try_format(&self, value: &impl Debug) -> Result<String, pest::error::Error<Rule>> {
-        let original = format!("{:#?}", value);
+        let original = format!("{:?}", value);
         self.try_format_string(&original)
     }
 
