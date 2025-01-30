@@ -27,7 +27,7 @@ let my_struct = MyStruct {
 println!("{:#?}");
 ```
 The output will look like this:
-![Regular Debug](assets/demo_filthy.png)
+![Regular Debug](https://raw.githubusercontent.com/cohaereo/chroma-dbg/refs/heads/main/assets/demo_filthy.png)
 So much wasted space for that array! So hard on the eyes! Disgusting!
 
 Now, let's use `chroma-dbg` to make it look fancy:
@@ -37,7 +37,7 @@ println!("{}", my_struct.chroma_dbg());
 ```
 
 The output will look like this:
-![Fancy Demo](assets/demo_fancy.png)
+![Fancy Demo](https://raw.githubusercontent.com/cohaereo/chroma-dbg/refs/heads/main/assets/demo_fancy.png)
 
 Much better! 🎉
 
