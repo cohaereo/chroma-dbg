@@ -13,7 +13,7 @@ ident = @{ !digit ~ (alphanumeric | "_")+ }
 
 integer     = ${ digit+ }
 hex_integer = ${ "0x" ~ hexadecimal+ }
-float       = ${ digit+ ~ "." ~ digit+ ~ ("e" ~ ("-" | "+") ~ digit+)? }
+float       = ${ digit+ ~ "." ~ digit+ ~ ("e" ~ ("-" | "+")? ~ digit+)? }
 number      =  { ("-" | "+")? ~ (hex_integer | float | integer) }
 
 string       = ${ "\"" ~ string_inner ~ "\"" }
