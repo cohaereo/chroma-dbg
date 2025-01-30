@@ -1,0 +1,45 @@
+comment_block      = { "/*" ~ (!"*/" ~ ANY)* ~ "*/" }
+comment_singleline = { "//" ~ (!NEWLINE ~ ANY)* }
+
+WHITESPACE = _{ " " | "\t" | NEWLINE }
+COMMENT    = _{ (comment_block | comment_singleline) }
+
+alpha        =  { 'a'..'z' | 'A'..'Z' }
+digit        =  { '0'..'9' }
+hexadecimal  = _{ '0'..'9' | 'A'..'F' }
+alphanumeric =  { (alpha | digit) }
+
+ident = @{ !digit ~ (alphanumeric | "_")+ }
+
+integer     = ${ digit+ }
+hex_integer = ${ "0x" ~ hexadecimal+ }
+float       = ${ digit+ ~ "." ~ digit+ }
+number      =  { ("-" | "+")? ~ (hex_integer | float | integer) }
+
+string       = ${ "\"" ~ string_inner ~ "\"" }
+string_inner = @{ char* }
+char         =  {
+    !("\"" | "\\") ~ ANY
+  | "\\" ~ ("\"" | "\\" | "/" | "b" | "f" | "n" | "r" | "t")
+  | "\\" ~ ("u" ~ ASCII_HEX_DIGIT{4})
+}
+
+boolean = { "true" | "false" }
+
+// cohae: Tuple/named struct enum variants are already handled by other struct rules
+enum_variant = { ident }
+struct       = { ident ~ "{" ~ fields ~ "}" }
+tuple_struct = { ident ~ "(" ~ tuple_elements ~ ")" }
+tuple        = { "(" ~ tuple_elements ~ ")" }
+
+fields         = { field ~ ("," ~ field)* ~ ","? }
+field          = { ident ~ ":" ~ value }
+tuple_elements = { value? ~ ("," ~ value)* ~ ","? }
+
+array = { "[" ~ value? ~ ("," ~ value)* ~ ","? ~ "]" }
+
+value = _{ boolean | struct | tuple_struct | number | string | enum_variant | array | tuple }
+
+main = _{
+    SOI ~ (value | WHITESPACE)* ~ EOI
+}
