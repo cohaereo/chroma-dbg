@@ -6,7 +6,7 @@ pub use config::{ChromaConfig, Color, InlineThreshold, IntegerFormat};
 use core::fmt;
 use std::fmt::{Debug, Write};
 
-use pest::{Parser, iterators::Pair};
+use pest::{iterators::Pair, Parser};
 use pest_derive::Parser;
 use util::IndentedWriter;
 
@@ -92,6 +92,21 @@ impl ChromaConfig {
                     self.emit_value(w, field);
                     if i < field_count - 1 {
                         Self::emit_plain(w, ", ");
+                    }
+                }
+                Self::emit_plain(w, ")");
+            }
+            Rule::bitflags_struct => {
+                let mut pairs = pair.into_inner();
+                let name = pairs.next().unwrap().as_str();
+                Self::emit_colored(w, name, self.identifier_color);
+                Self::emit_plain(w, "(");
+                let fields = pairs.next().unwrap().into_inner();
+                let field_count = fields.len();
+                for (i, field) in fields.enumerate() {
+                    self.emit_value(w, field);
+                    if i < field_count - 1 {
+                        Self::emit_plain(w, " | ");
                     }
                 }
                 Self::emit_plain(w, ")");

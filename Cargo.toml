@@ -1,6 +1,6 @@
 [package]
 name = "chroma-dbg"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 description = "Put your primate brain's pattern recognition to use with syntax highlighting for the standard Debug trait"
 authors = ["cohaereo <cohae@cohae.dev>"]
@@ -21,3 +21,6 @@ include = ["**/*.rs", "**/*.pest", "Cargo.toml"]
 anstyle = "1.0.10"
 pest = "2.7.15"
 pest_derive = "2.7.15"
+
+[dev-dependencies]
+bitflags = "2.9.3"

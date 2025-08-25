@@ -1,5 +1,16 @@
 #![allow(unused)]
+use bitflags::bitflags;
 use chroma_dbg::{ChromaConfig, ChromaDebug};
+
+bitflags! {
+    #[derive(Debug)]
+    struct TestFlags: u32 {
+        const A = (1 << 0);
+        const B = (1 << 1);
+        const C = (1 << 2);
+        const D = (1 << 3);
+    }
+}
 
 #[derive(Debug)]
 struct Foo {
@@ -12,6 +23,7 @@ struct Foo {
     y: f32,
     z: String,
     alpha: Vec<bool>,
+    flags: TestFlags,
 }
 
 #[derive(Debug)]
@@ -58,10 +70,28 @@ fn main() {
         y: 3.14,
         z: "Hello, world!".to_string(),
         alpha: vec![true, false, true],
+        flags: TestFlags::all(),
     };
+
+    if let Err(e) = ChromaConfig::DEFAULT.try_format(&foo) {
+        eprintln!("Error parsing debug output: {e:?}");
+        return;
+    }
+
+    println!("STD (normal)");
+    println!("{:?}", foo);
+    println!();
+
+    println!("STD (\"pretty\")");
     println!("{:#?}", foo);
+    println!();
+
+    println!("Chroma (default)");
     println!("{}", foo.dbg_chroma());
+    println!();
+
     // Custom configs can be used to tweak colors/inlining/integer formatting
+    println!("Chroma (custom)");
     println!(
         "{}",
         ChromaConfig {
