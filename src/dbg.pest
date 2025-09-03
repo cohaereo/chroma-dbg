@@ -17,11 +17,11 @@ float       = ${ ("-" | "+")? ~ digit+ ~ "." ~ digit+ ~ ("e" ~ ("-" | "+")? ~ di
 number      =  { (hex_integer | float | integer) }
 
 string       = ${ "\"" ~ string_inner ~ "\"" }
-string_inner = @{ char* }
+string_inner = _{ char* }
 char         =  {
-    !("\"" | "\\") ~ ANY
-    | escape_sequence
+    unicode | escape_sequence
 }
+unicode = { !("\"" | "\\") ~ ANY }
 escape_sequence = {
   | "\\" ~ ("\"" | "\'" | "\\" | "/" | "b" | "f" | "n" | "r" | "t" | "0")
   | "\\" ~ ("u" ~ "{" ~ ASCII_HEX_DIGIT* ~ "}")

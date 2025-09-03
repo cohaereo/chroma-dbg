@@ -28,3 +28,39 @@ fn test_strings() {
             .expect("Failed to format wide escaped characters")
     );
 }
+
+#[test]
+fn test_chars() {
+    let simple = 'a';
+    let wide = '\u{1F600}';
+    let escaped = '\0';
+    let double_quote = '"';
+
+    println!(
+        "{}",
+        ChromaConfig::DEFAULT
+            .try_format(&simple)
+            .expect("Failed to format simple character")
+    );
+
+    println!(
+        "{}",
+        ChromaConfig::DEFAULT
+            .try_format(&wide)
+            .expect("Failed to format wide character")
+    );
+
+    println!(
+        "{}",
+        ChromaConfig::DEFAULT
+            .try_format(&escaped)
+            .expect("Failed to format escaped character")
+    );
+
+    println!(
+        "{}",
+        ChromaConfig::DEFAULT
+            .try_format(&double_quote)
+            .expect("Failed to format double quote character")
+    );
+}

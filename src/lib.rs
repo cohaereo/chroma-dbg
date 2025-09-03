@@ -167,7 +167,22 @@ impl ChromaConfig {
                 }
             }
             Rule::string => {
-                Self::emit_colored(w, pair.as_str(), self.string_color);
+                Self::emit_colored(w, "\"", self.string_color);
+                let chars = pair.into_inner();
+                for char in chars {
+                    let char = char.into_inner().next().unwrap();
+                    match char.as_rule() {
+                        Rule::escape_sequence => {
+                            Self::emit_colored(w, char.as_str(), self.string_escape_color);
+                        }
+                        _ => {
+                            Self::emit_colored(w, char.as_str(), self.string_color);
+                        }
+                    }
+
+                    // Self::emit_colored(w, char.as_str(), self.string_color);
+                }
+                Self::emit_colored(w, "\"", self.string_color);
             }
             Rule::enum_variant => {
                 Self::emit_colored(w, pair.as_str(), self.identifier_color);

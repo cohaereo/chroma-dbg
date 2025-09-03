@@ -52,7 +52,10 @@ impl NameAndAge {
 
 fn main() {
     let foo = Foo {
-        t: Baz { a: 42, b: 3.14 },
+        t: Baz {
+            a: 42,
+            b: std::f32::consts::PI,
+        },
         uu: vec![NameAndAge::new("Bob", 34)],
         u: vec![
             NameAndAge::new("Bob", 34),
@@ -67,7 +70,7 @@ fn main() {
         w: Bar(true, -1337, "Hello, world!".to_string()),
         v: None,
         x: 8193, // Default hex threshold is 8192, so this will be printed as hex
-        y: 3.14,
+        y: std::f32::consts::PI,
         z: "Hello, world!".to_string(),
         alpha: vec![true, false, true],
         flags: TestFlags::all(),

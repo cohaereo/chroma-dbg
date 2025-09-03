@@ -9,6 +9,8 @@ pub struct ChromaConfig {
     pub numerical_color: Color,
     /// Color used for string literals.
     pub string_color: Color,
+    /// Color used for string escape sequences in string literals.
+    pub string_escape_color: Color,
     /// Color used for field names.
     pub field_color: Color,
 }
@@ -22,6 +24,7 @@ impl ChromaConfig {
         identifier_color: Color(19, 220, 242),
         numerical_color: Color(200, 129, 255),
         string_color: Color(232, 219, 97),
+        string_escape_color: Color(220, 108, 101),
         field_color: Color(255, 255, 255),
     };
 
