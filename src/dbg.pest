@@ -36,7 +36,7 @@ boolean = { "true" | "false" }
 // cohae: Tuple/named struct enum variants are already handled by other struct rules
 enum_variant    = { ident }
 struct          = { ident ~ "{" ~ fields ~ "}" }
-map_jsonlike    = { "{" ~ fields_jsonlike ~ "}" }
+map_jsonlike    = { "{" ~ fields_jsonlike? ~ "}" }
 tuple_struct    = { ident ~ "(" ~ tuple_elements ~ ")" }
 tuple           = { "(" ~ tuple_elements ~ ")" }
 bitflags_struct = { ident ~ "(" ~ bitflags_elements ~ ")" }

@@ -1,6 +1,6 @@
 [package]
 name = "chroma-dbg"
-version = "0.2.0"
+version = "0.2.1"
 edition = "2021"
 description = "Put your primate brain's pattern recognition to use with syntax highlighting for the standard Debug trait"
 authors = ["cohaereo <cohae@cohae.dev>"]

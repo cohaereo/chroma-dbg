@@ -78,4 +78,9 @@ VertexLitGeneric {
             },
         ),
     ),
+    empty_remaining_properties: Table(
+        Table(
+            {},
+        ),
+    ),
 }
