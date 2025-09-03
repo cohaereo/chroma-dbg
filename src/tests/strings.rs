@@ -20,7 +20,7 @@ fn test_strings() {
     );
 
     // Same as above, but including wide characters
-    let escape_characters_wide = "\x41\n\r\t\\\0\'\"\u{1F600}";
+    let escape_characters_wide = "\x7F\n\r\t\\\0\'\"\u{3F600}";
     println!(
         "{}",
         ChromaConfig::DEFAULT
@@ -35,6 +35,7 @@ fn test_chars() {
     let wide = '\u{1F600}';
     let escaped = '\0';
     let double_quote = '"';
+    let single_quote = '\'';
 
     println!(
         "{}",
@@ -62,5 +63,12 @@ fn test_chars() {
         ChromaConfig::DEFAULT
             .try_format(&double_quote)
             .expect("Failed to format double quote character")
+    );
+
+    println!(
+        "{}",
+        ChromaConfig::DEFAULT
+            .try_format(&single_quote)
+            .expect("Failed to format single quote character")
     );
 }

@@ -18,6 +18,9 @@ number      =  { (hex_integer | float | integer) }
 
 string       = ${ "\"" ~ string_inner ~ "\"" }
 string_inner = _{ char* }
+// cohae: double quote has a separate rule for char literals, as to not screw with normal strings
+char_literal = { "'" ~ !("'") ~ (char | char_double_quote) ~ "'" }
+char_double_quote = { "\"" }
 char         =  {
     unicode | escape_sequence
 }
@@ -49,7 +52,7 @@ array = { "[" ~ value? ~ ("," ~ value)* ~ ","? ~ "]" }
 
 assignment = { ident ~ "=" ~ value }
 
-value = _{ boolean | struct | map_jsonlike | assignment | tuple_struct | bitflags_struct | number | string | enum_variant | array | tuple }
+value = _{ boolean | struct | map_jsonlike | assignment | tuple_struct | bitflags_struct | number | string | char_literal | enum_variant | array | tuple }
 
 main = _{
     SOI ~ (value | WHITESPACE)* ~ EOI

@@ -179,10 +179,25 @@ impl ChromaConfig {
                             Self::emit_colored(w, char.as_str(), self.string_color);
                         }
                     }
-
-                    // Self::emit_colored(w, char.as_str(), self.string_color);
                 }
                 Self::emit_colored(w, "\"", self.string_color);
+            }
+            Rule::char_literal => {
+                Self::emit_colored(w, "'", self.string_color);
+                let char = pair.into_inner().next().unwrap();
+                println!("{:?}", char.as_rule());
+                if char.as_rule() == Rule::char {
+                    let char = char.into_inner().next().unwrap();
+                    match char.as_rule() {
+                        Rule::escape_sequence => {
+                            Self::emit_colored(w, char.as_str(), self.string_escape_color);
+                        }
+                        _ => {
+                            Self::emit_colored(w, char.as_str(), self.string_color);
+                        }
+                    }
+                }
+                Self::emit_colored(w, "'", self.string_color);
             }
             Rule::enum_variant => {
                 Self::emit_colored(w, pair.as_str(), self.identifier_color);
