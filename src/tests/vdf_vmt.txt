@@ -1,0 +1,81 @@
+VertexLitGeneric {
+    basetexture: "models\\props_invasion\\props_alien\\alien_misc",
+    remaining_properties: Table(
+        Table(
+            {
+                "$phongboost": Value(
+                    Value(
+                        "3",
+                    ),
+                ),
+                "$phong": Value(
+                    Value(
+                        "1",
+                    ),
+                ),
+                "$selfillummask": Value(
+                    Value(
+                        "models\\props_invasion\\props_alien\\alien_misc_selfillum",
+                    ),
+                ),
+                "$selfillum": Value(
+                    Value(
+                        "1",
+                    ),
+                ),
+                "$basemapalphaphongmask": Value(
+                    Value(
+                        "1",
+                    ),
+                ),
+                "$phongfresnelranges": Array(
+                    Array(
+                        [
+                            Value(
+                                Value(
+                                    "1",
+                                ),
+                            ),
+                            Value(
+                                Value(
+                                    "1.5",
+                                ),
+                            ),
+                            Value(
+                                Value(
+                                    "1",
+                                ),
+                            ),
+                        ],
+                    ),
+                ),
+                "$phongexponent": Value(
+                    Value(
+                        "15",
+                    ),
+                ),
+                "$phongtint": Array(
+                    Array(
+                        [
+                            Value(
+                                Value(
+                                    "0.3",
+                                ),
+                            ),
+                            Value(
+                                Value(
+                                    "0.7",
+                                ),
+                            ),
+                            Value(
+                                Value(
+                                    "0.7",
+                                ),
+                            ),
+                        ],
+                    ),
+                ),
+            },
+        ),
+    ),
+}

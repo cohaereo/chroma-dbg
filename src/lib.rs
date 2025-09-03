@@ -1,6 +1,9 @@
 mod config;
 mod util;
 
+#[cfg(test)]
+mod tests;
+
 pub use config::{ChromaConfig, Color, InlineThreshold, IntegerFormat};
 
 use core::fmt;
@@ -66,6 +69,37 @@ impl ChromaConfig {
                         w.push_indent();
                     }
                     Self::emit_colored(w, name, self.field_color);
+                    Self::emit_plain(w, ": ");
+                    self.emit_value(w, field.next().unwrap());
+                    if i < field_count - 1 || !inline {
+                        Self::emit_plain(w, ", ");
+                    } else {
+                        Self::emit_plain(w, " ");
+                    }
+
+                    if !inline {
+                        Self::emit_plain(w, "\n");
+                        w.pop_indent();
+                    }
+                }
+                Self::emit_plain(w, "}");
+            }
+            Rule::map_jsonlike => {
+                let mut pairs = pair.into_inner();
+                Self::emit_plain(w, "{ ");
+                let inline = self.inline_struct.should_inline(pairs.as_str().len());
+                if !inline {
+                    Self::emit_plain(w, "\n");
+                }
+                let fields = pairs.next().unwrap().into_inner();
+                let field_count = fields.len();
+                for (i, field) in fields.enumerate() {
+                    let mut field = field.into_inner();
+                    let name = field.next().unwrap().as_str();
+                    if !inline {
+                        w.push_indent();
+                    }
+                    Self::emit_colored(w, name, self.string_color);
                     Self::emit_plain(w, ": ");
                     self.emit_value(w, field.next().unwrap());
                     if i < field_count - 1 || !inline {
