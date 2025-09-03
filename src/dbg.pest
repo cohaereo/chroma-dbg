@@ -20,8 +20,12 @@ string       = ${ "\"" ~ string_inner ~ "\"" }
 string_inner = @{ char* }
 char         =  {
     !("\"" | "\\") ~ ANY
-  | "\\" ~ ("\"" | "\\" | "/" | "b" | "f" | "n" | "r" | "t")
-  | "\\" ~ ("u" ~ ASCII_HEX_DIGIT{4})
+    | escape_sequence
+}
+escape_sequence = {
+  | "\\" ~ ("\"" | "\'" | "\\" | "/" | "b" | "f" | "n" | "r" | "t" | "0")
+  | "\\" ~ ("u" ~ "{" ~ ASCII_HEX_DIGIT* ~ "}")
+  | "\\" ~ ("x" ~ ASCII_HEX_DIGIT{2})
 }
 
 boolean = { "true" | "false" }
