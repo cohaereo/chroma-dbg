@@ -33,6 +33,12 @@ impl ChromaConfig {
         inline_array: InlineThreshold::Always,
         ..Self::DEFAULT
     };
+
+    pub const VERBOSE: ChromaConfig = ChromaConfig {
+        inline_struct: InlineThreshold::Never,
+        inline_array: InlineThreshold::Never,
+        ..Self::DEFAULT
+    };
 }
 
 impl Default for ChromaConfig {
@@ -84,9 +90,3 @@ impl IntegerFormat {
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub struct Color(pub u8, pub u8, pub u8);
-
-impl From<Color> for anstyle::RgbColor {
-    fn from(color: Color) -> Self {
-        Self(color.0, color.1, color.2)
-    }
-}

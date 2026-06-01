@@ -76,11 +76,6 @@ fn main() {
         flags: TestFlags::all(),
     };
 
-    if let Err(e) = ChromaConfig::DEFAULT.try_format(&foo) {
-        eprintln!("Error parsing debug output: {e:?}");
-        return;
-    }
-
     println!("STD (normal)");
     println!("{:?}", foo);
     println!();

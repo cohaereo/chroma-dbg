@@ -3,30 +3,18 @@ use crate::ChromaConfig;
 #[test]
 fn test_strings() {
     let string_simple = "Hello, World!";
-    println!(
-        "{}",
-        ChromaConfig::DEFAULT
-            .try_format(&string_simple)
-            .expect("Failed to format simple string")
-    );
+    println!("{}", ChromaConfig::DEFAULT.format(&string_simple));
 
     // Only single character escape sequences
     let escape_characters_simple = "\n\r\t\\\0\'\"";
     println!(
         "{}",
-        ChromaConfig::DEFAULT
-            .try_format(&escape_characters_simple)
-            .expect("Failed to format escaped characters")
+        ChromaConfig::DEFAULT.format(&escape_characters_simple)
     );
 
     // Same as above, but including wide characters
     let escape_characters_wide = "\x7F\n\r\t\\\0\'\"\u{3F600}";
-    println!(
-        "{}",
-        ChromaConfig::DEFAULT
-            .try_format(&escape_characters_wide)
-            .expect("Failed to format wide escaped characters")
-    );
+    println!("{}", ChromaConfig::DEFAULT.format(&escape_characters_wide));
 }
 
 #[test]
@@ -37,38 +25,13 @@ fn test_chars() {
     let double_quote = '"';
     let single_quote = '\'';
 
-    println!(
-        "{}",
-        ChromaConfig::DEFAULT
-            .try_format(&simple)
-            .expect("Failed to format simple character")
-    );
+    println!("{}", ChromaConfig::DEFAULT.format(&simple));
 
-    println!(
-        "{}",
-        ChromaConfig::DEFAULT
-            .try_format(&wide)
-            .expect("Failed to format wide character")
-    );
+    println!("{}", ChromaConfig::DEFAULT.format(&wide));
 
-    println!(
-        "{}",
-        ChromaConfig::DEFAULT
-            .try_format(&escaped)
-            .expect("Failed to format escaped character")
-    );
+    println!("{}", ChromaConfig::DEFAULT.format(&escaped));
 
-    println!(
-        "{}",
-        ChromaConfig::DEFAULT
-            .try_format(&double_quote)
-            .expect("Failed to format double quote character")
-    );
+    println!("{}", ChromaConfig::DEFAULT.format(&double_quote));
 
-    println!(
-        "{}",
-        ChromaConfig::DEFAULT
-            .try_format(&single_quote)
-            .expect("Failed to format single quote character")
-    );
+    println!("{}", ChromaConfig::DEFAULT.format(&single_quote));
 }
