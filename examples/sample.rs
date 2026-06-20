@@ -50,6 +50,7 @@ impl NameAndAge {
     }
 }
 
+#[allow(clippy::disallowed_names)]
 fn main() {
     let foo = Foo {
         t: Baz {

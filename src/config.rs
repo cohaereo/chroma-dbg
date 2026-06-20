@@ -19,7 +19,7 @@ impl ChromaConfig {
     pub const DEFAULT: ChromaConfig = ChromaConfig {
         inline_struct: InlineThreshold::MaxLength(64),
         inline_array: InlineThreshold::MaxLength(64),
-        integer_format: IntegerFormat::HexWhenOver(8192),
+        integer_format: IntegerFormat::Decimal,
 
         identifier_color: Color(19, 220, 242),
         numerical_color: Color(200, 129, 255),
@@ -70,22 +70,9 @@ impl InlineThreshold {
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum IntegerFormat {
     /// Always render integers as decimal.
-    AlwaysDecimal,
-    /// Always render integers as hexadecimal. Note that negative numbers will still be rendered as decimal.
-    AlwaysHex,
-    /// Render integers as hexadecimal when they are over a certain size.
-    HexWhenOver(u64),
-}
-
-impl IntegerFormat {
-    pub fn format(&self, value: u64) -> String {
-        match self {
-            IntegerFormat::AlwaysDecimal => value.to_string(),
-            IntegerFormat::AlwaysHex => format!("0x{:x}", value),
-            IntegerFormat::HexWhenOver(max) if value > *max => format!("0x{:x}", value),
-            IntegerFormat::HexWhenOver(_) => value.to_string(),
-        }
-    }
+    Decimal,
+    /// Render integers as hexadecimal.
+    Hex,
 }
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]

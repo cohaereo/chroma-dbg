@@ -21,7 +21,10 @@ impl<T: Debug> ChromaDebug for T {
 
 impl ChromaConfig {
     pub fn format(&self, value: &impl Debug) -> String {
-        let original = format!("{:?}", value);
+        let original = match self.integer_format {
+            IntegerFormat::Decimal => format!("{:?}", value),
+            IntegerFormat::Hex => format!("{:#X?}", value),
+        };
         self.format_string(&original)
     }
 
@@ -275,14 +278,7 @@ impl<'a, W: Write> Formatter<'a, W> {
                 }
             }
             Token::Number(s) => {
-                if let Ok(val) = s.parse::<u64>() {
-                    self.emit_colored(
-                        &self.config.integer_format.format(val),
-                        self.config.numerical_color,
-                    );
-                } else {
-                    self.emit_colored(s, self.config.numerical_color);
-                }
+                self.emit_colored(s, self.config.numerical_color);
             }
             Token::Bool(b) => {
                 self.emit_colored(
